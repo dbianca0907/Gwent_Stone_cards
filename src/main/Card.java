@@ -9,9 +9,9 @@ public class Card {
     static String description;
     static ArrayList<String> colors;
     static String name;
-    boolean Tank = false;
-    boolean isFrozen = false;
-    boolean hasAbilities = false;
+    static boolean Tank = false;
+    static boolean isFrozen = false;
+    static boolean hasAbilities = false;
     static int type = 0;
 
 
@@ -33,12 +33,28 @@ public class Card {
             type = 3;
         }
     }
-
+    // getters and setters
     public static void setDescription(String description) {
         Card.description = description;
     }
 
     public static void setColors(ArrayList<String> colors) {
         Card.colors = colors;
+    }
+
+    public static void setMana(int mana) {
+        Card.mana = mana;
+    }
+
+    public static void setHealth(int health) {
+        Card.health = health;
+    }
+
+    public static void setAttackDamage(int attackDamage) {
+        Card.attackDamage = attackDamage;
+    }
+
+    public static void setName(String name) {
+        Card.name = name;
     }
 }

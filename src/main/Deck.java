@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Deck {
     ArrayList<Card> cards = null;
-    static int nrCards = 0;
+    static int nrCards;
     static boolean wasUsed = false;
 
     public ArrayList<Card> getCards() {
@@ -15,4 +15,18 @@ public class Deck {
     }
 
 
+    // getters and setters
+
+
+    public static int getNrCards() {
+        return nrCards;
+    }
+
+    public static boolean isWasUsed() {
+        return wasUsed;
+    }
+
+    public static void setNrCards(int nrCards) {
+        Deck.nrCards = nrCards;
+    }
 }
