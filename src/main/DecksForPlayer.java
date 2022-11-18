@@ -3,31 +3,30 @@ import java.util.*;
 
 public class DecksForPlayer {
 
-    static int nrDecks;
-    static int nrCardsInDecks;
+    private int nrDecks;
+    private int nrCardsInDecks;
     ArrayList<Deck> decks = null;
 
-    public ArrayList getDecksForPlayer() {
+    public ArrayList<Deck> getDecksForPlayer() {
         if (decks == null) {
-            decks = new ArrayList<Deck>(nrDecks);
+            decks = new ArrayList<Deck>();
             return decks;
         }
         return decks;
     }
 
-    public static int getNrDecks() {
+    public int getNrDecks() {
         return nrDecks;
     }
 
-    public static int getNrCardsInDecks() {
+    public int getNrCardsInDecks() {
         return nrCardsInDecks;
     }
 
-    public static void setNrDecks(int nrDecks) {
-        DecksForPlayer.nrDecks = nrDecks;
+    public void setNrDecks(int nrDecks) {this.nrDecks = nrDecks;
     }
 
-    public static void setNrCardsInDecks(int nrCardsInDecks) {
-        DecksForPlayer.nrCardsInDecks = nrCardsInDecks;
+    public void setNrCardsInDecks(int nrCardsInDecks) {
+        this.nrCardsInDecks = nrCardsInDecks;
     }
 }

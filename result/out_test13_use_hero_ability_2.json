@@ -1,21 +1,18 @@
-[ {
+[ { }, { }, { }, { }, {
   "command" : "placeCard",
-  "handIdx" : 0,
-  "error" : "Not enough mana to place card on table.",
-  "nume carte" : "Disciple",
-  "MANA CARTE" : 2,
-  "mana player" : 1
-}, { }, { }, { }, { }, { }, { }, {
+  "handIdx" : 1,
+  "error" : "Cannot place environment card on table."
+}, { }, { }, {
   "command" : "getPlayerTurn",
-  "output" : 2
+  "output" : 1
 }, {
   "command" : "getPlayerMana",
   "handIdx" : 1,
-  "output" : 222
+  "output" : 191
 }, {
   "command" : "getPlayerMana",
   "handIdx" : 2,
-  "output" : 224
+  "output" : 190
 }, {
   "command" : "getCardsInHand",
   "playerIdx" : 1,

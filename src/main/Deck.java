@@ -3,12 +3,12 @@ import java.util.*;
 
 public class Deck {
     ArrayList<Card> cards = null;
-    static int nrCards;
-    static boolean wasUsed = false;
+    private int nrCards;
+    private boolean wasUsed = false;
 
     public ArrayList<Card> getCards() {
         if (cards == null) {
-            cards = new ArrayList<Card>(nrCards);
+            cards = new ArrayList<Card>();
             return cards;
         }
         return cards;
@@ -18,15 +18,24 @@ public class Deck {
     // getters and setters
 
 
-    public static int getNrCards() {
+    public int getNrCards() {
         return nrCards;
     }
 
-    public static boolean isWasUsed() {
+    public boolean isWasUsed() {
         return wasUsed;
     }
 
-    public static void setNrCards(int nrCards) {
-        Deck.nrCards = nrCards;
+    public void setNrCards(int nrCards) {
+        this.nrCards = nrCards;
     }
+
+    public void setWasUsed(boolean wasUsed) {
+        this.wasUsed = wasUsed;
+    }
+
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = cards;
+    }
+
 }

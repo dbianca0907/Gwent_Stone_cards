@@ -1,60 +1,136 @@
 package main;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.*;
 
-
+// de verificat daca au ceva metodele fara static de la mana
 public class Card {
-    static int mana = 0;
-    static int health;
-    static int attackDamage;
-    static String description;
-    static ArrayList<String> colors;
-    static String name;
-    static boolean Tank = false;
-    static boolean isFrozen = false;
-    static boolean hasAbilities = false;
-    static int type = 0;
+    public int mana;
+    private int health;
+    private int attackDamage;
+    private String description;
+    private ArrayList<String> colors;
+    private String name;
 
+    // daca nu mai sunt final, de adaugat in ChosenDeck si la parsare
+    @JsonIgnore
+    boolean Tank = false;
+    @JsonIgnore
+    boolean isFrozen = false;
+    @JsonIgnore
+    boolean hasAbilities = false;
+    @JsonIgnore
+    int type = 0;
+    int specificRow;
 
-    public void nextRound(int counter) {
-        mana = mana + counter;
+    public void attacked(int counter) {
+        mana = mana - counter;
     }
 
-    public void getType(String name) {
+    // imi verifica daca o carte este Tank, are abilitati, a fost sau nu inghetata
+
+    public void getTheType(String name) {
         if (name.equals("The Ripper") || name.equals("Miraj") ||
-                name.equals("The cursed one") || name.equals("Disciple")) {
+                name.equals("The Cursed One") || name.equals("Disciple")) {
             type = 1;
             hasAbilities = true;
         } else if (name.equals("Goliath") || name.equals("Warden")) {
             type = 1;
             Tank = true;
+        }else if (name.equals("Sentinel") || name.equals("Berserker")) {
+            type = 1;
         } else if (name.equals("Firestorm") || name.equals ("Winterfell") || name.equals("Heart Hound")) {
             type = 2;
         } else {
             type = 3;
         }
     }
+
+
     // getters and setters
-    public static void setDescription(String description) {
-        Card.description = description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public static void setColors(ArrayList<String> colors) {
-        Card.colors = colors;
+    public void setColors(ArrayList<String> colors) {
+        this.colors = colors;
     }
 
-    public static void setMana(int mana) {
-        Card.mana = mana;
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 
-    public static void setHealth(int health) {
-        Card.health = health;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
-    public static void setAttackDamage(int attackDamage) {
-        Card.attackDamage = attackDamage;
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
     }
 
-    public static void setName(String name) {
-        Card.name = name;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public  int getMana() {
+        return mana;
+    }
+
+    public  int getHealth() {
+        return health;
+    }
+
+    public  int getAttackDamage() {
+        return attackDamage;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ArrayList<String> getColors() {
+        return colors;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public boolean isTank() {
+        return Tank;
+    }
+
+    public boolean isFrozen() {
+        return isFrozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        isFrozen = frozen;
+    }
+
+    public int getSpecificRow() {
+        return specificRow;
+    }
+
+    public void setSpecificRow (String name, int indx) {
+        if (getType() != 1)
+            specificRow = -1;
+        if (name.equals("The Ripper") || name.equals("Miraj") ||
+                name.equals("Goliath") || name.equals("Warden")) {
+            if (indx == 1)
+                specificRow = 2;
+            else
+                specificRow = 1;
+        } else {
+            if (indx == 1)
+                specificRow = 3;
+            else
+                specificRow = 0;
+        }
+
     }
 }

@@ -1,18 +1,18 @@
 [ { }, { }, { }, { }, { }, { }, {
   "command" : "getPlayerTurn",
-  "output" : 2
-}, { }, { }, { }, { }, { }, { }, {
+  "output" : 1
+}, { }, { }, { }, { }, { }, { }, { }, { }, {
   "command" : "placeCard",
   "handIdx" : 1,
   "error" : "Cannot place card on table since row is full."
 }, { }, { }, {
   "command" : "getPlayerMana",
   "handIdx" : 2,
-  "output" : 407
+  "output" : 550
 }, {
   "command" : "getPlayerMana",
   "handIdx" : 1,
-  "output" : 406
+  "output" : 549
 }, {
   "command" : "getCardsInHand",
   "playerIdx" : 2,
