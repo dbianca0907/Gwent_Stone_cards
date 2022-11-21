@@ -3,11 +3,11 @@ package main;
 import java.util.ArrayList;
 
 public class Hand {
-    Deck handCards = null;
+    ArrayList<Card> handCards = null;;
 
-    public Deck getHandCards() {
+    public ArrayList<Card> getHandCards() {
         if (handCards == null) {
-            handCards = new Deck();
+            handCards = new ArrayList<Card>();
             return handCards;
         }
         return handCards;
@@ -15,7 +15,7 @@ public class Hand {
 
     //generate getters and setters
 
-    public void setHandCards(Deck handCards) {
+    public void setHandCards(ArrayList<Card> handCards) {
         this.handCards = handCards;
     }
 }

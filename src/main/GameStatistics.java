@@ -3,10 +3,11 @@ import java.util.*;
 
 public class GameStatistics {
     static int numberOfGames = 0;
-    static int numberOfTurns = 0;
-    static int numberOfWonGamesOne = 0;
-    static int numberOfWonGamesTwo = 0;
-    static int numberOfRounds = 1;
+    int numberOfTurns = 0;
+     int numberOfWonGamesOne = 0;
+     int numberOfWonGamesTwo = 0;
+    int numberOfRounds = 1;
+    boolean hasFinished = false;
 
     public void incrNumberOfGames() {
         numberOfGames++;
@@ -18,6 +19,7 @@ public class GameStatistics {
         numberOfWonGamesOne++;
     }
     public void incrNumberOfWonGamesTwo() {
+
         numberOfWonGamesTwo++;
     }
 
@@ -27,23 +29,32 @@ public class GameStatistics {
 
     //generate getters and setters
 
+
+    public void setHasFinished(boolean hasFinished) {
+        this.hasFinished = hasFinished;
+    }
+
+    public boolean isHasFinished() {
+        return hasFinished;
+    }
+
     public static int getNumberOfGames() {
         return numberOfGames;
     }
 
-    public static int getNumberOfTurns() {
+    public int getNumberOfTurns() {
         return numberOfTurns;
     }
 
-    public static int getNumberOfWonGamesOne() {
+    public  int getNumberOfWonGamesOne() {
         return numberOfWonGamesOne;
     }
 
-    public static int getNumberOfWonGamesTwo() {
+    public  int getNumberOfWonGamesTwo() {
         return numberOfWonGamesTwo;
     }
 
-    public static int getNumberOfRounds() {
+    public int getNumberOfRounds() {
         return numberOfRounds;
     }
 
@@ -51,19 +62,19 @@ public class GameStatistics {
         GameStatistics.numberOfGames = numberOfGames;
     }
 
-    public static void setNumberOfTurns(int numberOfTurns) {
-        GameStatistics.numberOfTurns = numberOfTurns;
+    public void setNumberOfTurns(int numberOfTurns) {
+        this.numberOfTurns = numberOfTurns;
     }
 
-    public static void setNumberOfWonGamesOne(int numberOfWonGamesOne) {
-        GameStatistics.numberOfWonGamesOne = numberOfWonGamesOne;
+    public  void setNumberOfWonGamesOne(int numberOfWonGamesOne) {
+        this.numberOfWonGamesOne = numberOfWonGamesOne;
     }
 
-    public static void setNumberOfWonGamesTwo(int numberOfWonGamesTwo) {
-        GameStatistics.numberOfWonGamesTwo = numberOfWonGamesTwo;
+    public  void setNumberOfWonGamesTwo(int numberOfWonGamesTwo) {
+        this.numberOfWonGamesTwo = numberOfWonGamesTwo;
     }
 
-    public static void setNumberOfRounds(int numberOfRounds) {
-        GameStatistics.numberOfRounds = numberOfRounds;
+    public void setNumberOfRounds(int numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
     }
 }

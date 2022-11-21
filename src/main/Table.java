@@ -3,25 +3,24 @@ package main;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
+import java.util.*;
 
 public class Table {
     ArrayList<ArrayList<Card>> cardsOnTable = null;
-    ArrayList<Card> zeroRow = null;
-    ArrayList<Card> firstRow = null;
-    ArrayList<Card> secondRow = null;
-    ArrayList<Card> thirdRow = null;
 
     public void addCardsOnTableForOne(Card card) {
+        card.setSpecificRow(card.getName(), 1);
         if (card.getSpecificRow() == 2)
-            getSecondRow().add(card);
+            getCardsOnTable().get(2).add(card);
         else if (card.getSpecificRow() == 3)
-            getThirdRow().add(card);
+            getCardsOnTable().get(3).add(card);
     }
     public void addCardsOnTableForTwo(Card card) {
+        card.setSpecificRow(card.getName(), 2);
         if (card.getSpecificRow() == 1)
-            getFirstRow().add(card);
+            getCardsOnTable().get(1).add(card);
         else if (card.getSpecificRow() == 0)
-            getZeroRow().add(card);
+            getCardsOnTable().get(0).add(card);
     }
 
     public void placeCard(Card card, int indxPlayer, Player players, int indx){
@@ -30,57 +29,35 @@ public class Table {
                 addCardsOnTableForOne(card);
                 int counter = (-1) * card.getMana();
                 players.playerOne.increaseMana(counter);
-                players.playerOne.getCardsInHand().getHandCards().getCards().remove(indx);
+                players.playerOne.getCardsInHand().getHandCards().remove(indx);
             }
-        } else {
+        } else if (indxPlayer == 2) {
             if (players.playerTwo.getMana() >= card.getMana()) {
                 int counter = (-1) * card.getMana();
                 players.playerTwo.increaseMana(counter);
                 addCardsOnTableForTwo(card);
-                //players.playerTwo.getCardsInHand().getHandCards().getCards().remove(indx);
+                players.playerTwo.getCardsInHand().getHandCards().remove(indx);
             }
         }
     }
 
+    public boolean isFuLL(ArrayList<Card> arrayRow) {
+        if (arrayRow.size() == 5)
+            return true;
+        return false;
+    }
+
     // constructors
 
-    public ArrayList<ArrayList<Card>> cardsOnTable() {
+    public ArrayList<ArrayList<Card>> getCardsOnTable() {
         if (cardsOnTable == null) {
             cardsOnTable = new ArrayList<ArrayList<Card>>(4);
+            cardsOnTable.add(new ArrayList<Card>());
+            cardsOnTable.add(new ArrayList<Card>());
+            cardsOnTable.add(new ArrayList<Card>());
+            cardsOnTable.add(new ArrayList<Card>());
             return cardsOnTable;
         }
         return cardsOnTable;
-    }
-
-    public ArrayList<Card> getZeroRow() {
-        if (zeroRow == null) {
-            zeroRow = new ArrayList<Card>();
-            return zeroRow;
-        }
-        return zeroRow;
-    }
-
-    public ArrayList<Card> getFirstRow() {
-        if (firstRow == null) {
-            firstRow = new ArrayList<Card>();
-            return firstRow;
-        }
-        return firstRow;
-    }
-
-    public ArrayList<Card> getSecondRow() {
-        if (secondRow == null) {
-            secondRow = new ArrayList<Card>();
-            return secondRow;
-        }
-        return secondRow;
-    }
-
-    public ArrayList<Card> getThirdRow() {
-        if (thirdRow == null) {
-            thirdRow = new ArrayList<Card>();
-            return thirdRow;
-        }
-        return thirdRow;
     }
 }

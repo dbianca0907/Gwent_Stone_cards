@@ -1,80 +1,19 @@
 package main;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.*;
 
 import java.util.ArrayList;
 import java.util.*;
+
 import com.fasterxml.jackson.databind.node.ArrayNode;
+
 import java.util.Random;
 
 public class MyMain {
     public static void main(Input input, ArrayNode output, ObjectMapper objectMapper) {
-
-
-        // preparing for the game
-
-        DecksForPlayer groupDecksPlyrOne = new DecksForPlayer();
-        DecksForPlayer groupDecksPlyrTwo = new DecksForPlayer();
-        PlayerOne plyrOne = new PlayerOne();
-        PlayerTwo plyrTwo = new PlayerTwo();
-        Player players = new Player();
-
-        groupDecksPlyrOne.setNrDecks(input.getPlayerOneDecks().getNrDecks());
-        groupDecksPlyrTwo.setNrDecks(input.getPlayerTwoDecks().getNrDecks());
-        groupDecksPlyrOne.setNrCardsInDecks(input.getPlayerOneDecks().getNrCardsInDeck());
-        groupDecksPlyrTwo.setNrCardsInDecks(input.getPlayerTwoDecks().getNrCardsInDeck());
-
-        ArrayList<ArrayList<CardInput>> decksForOne = new ArrayList<ArrayList<CardInput>>();
-        ArrayList<ArrayList<CardInput>> decksForTwo = new ArrayList<ArrayList<CardInput>>();
-        decksForOne = input.getPlayerOneDecks().getDecks();
-        decksForTwo = input.getPlayerTwoDecks().getDecks();
-
-        // for player one
-        for (int i = 0; i < input.getPlayerOneDecks().getNrDecks(); i++) {
-            Deck deck = new Deck();
-            ArrayList<CardInput> cardsForOne = new ArrayList<CardInput>();
-            cardsForOne = decksForOne.get(i);
-            for (int j = 0; j < input.getPlayerOneDecks().getNrCardsInDeck(); j++) {
-                Card card = new Card();
-                card.setMana(cardsForOne.get(j).getMana());
-                card.setAttackDamage(cardsForOne.get(j).getAttackDamage());
-                card.setName(cardsForOne.get(j).getName());
-                card.setHealth(cardsForOne.get(j).getHealth());
-                card.setDescription(cardsForOne.get(j).getDescription());
-                card.setColors(cardsForOne.get(j).getColors());
-                card.getTheType(cardsForOne.get(j).getName());
-                deck.getCards().add(card);
-            }
-            groupDecksPlyrOne.getDecksForPlayer().add(deck);
-        }
-        //for player two
-
-        for (int i = 0; i < input.getPlayerTwoDecks().getNrDecks(); i++) {
-            Deck deck = new Deck();
-            ArrayList<CardInput> cardsForTwo =  new ArrayList<CardInput>();
-            cardsForTwo = decksForTwo.get(i);
-
-            for (int j = 0; j < input.getPlayerTwoDecks().getNrCardsInDeck(); j++) {
-                Card card = new Card();
-                card.setMana(cardsForTwo.get(j).getMana());
-                card.setAttackDamage(cardsForTwo.get(j).getAttackDamage());
-                card.setName(cardsForTwo.get(j).getName());
-                card.setHealth(cardsForTwo.get(j).getHealth());
-                card.setDescription(cardsForTwo.get(j).getDescription());
-                card.setColors(cardsForTwo.get(j).getColors());
-                card.getTheType(cardsForTwo.get(j).getName());
-
-                deck.getCards().add(card);
-            }
-            groupDecksPlyrTwo.getDecksForPlayer().add(deck);
-        }
-        // de verificat
-        plyrOne.getDecks();
-        plyrTwo.getDecks();
-
-        plyrOne.setDecks(groupDecksPlyrOne);
-        plyrTwo.setDecks(groupDecksPlyrTwo);
 
 
         // starting game
@@ -82,38 +21,47 @@ public class MyMain {
 
         ArrayList<GameInput> games = new ArrayList<GameInput>();
         games = input.getGames();
+        statistics.setNumberOfWonGamesOne(0);
+        statistics.setNumberOfWonGamesOne(0);
 
-        for (GameInput game: games) {
+        for (GameInput game : games) {
+            GameInitialize initGame = new GameInitialize();
+            PlayerOne plyrOne = new PlayerOne();
+            PlayerTwo plyrTwo = new PlayerTwo();
+            Player players = new Player();
+
+            // init Cards
+            DecksForPlayer groupDecksPlyrOne = new DecksForPlayer();
+            DecksForPlayer groupDecksPlyrTwo = new DecksForPlayer();
+            groupDecksPlyrOne = initGame.initDecksForPLayer(input.getPlayerOneDecks());
+            groupDecksPlyrTwo = initGame.initDecksForPLayer(input.getPlayerTwoDecks());
+            plyrOne.getDecks();
+            plyrTwo.getDecks();
+
+            plyrOne.setDecks(groupDecksPlyrOne);
+            plyrTwo.setDecks(groupDecksPlyrTwo);
+
             statistics.incrNumberOfGames();
+            statistics.setNumberOfRounds(1);
+            statistics.setNumberOfTurns(0);
+            statistics.setHasFinished(false);
+
             FrozenCards frozenCards = new FrozenCards();
             Table table = new Table();
-
-            Hand cardsInHandOne = new Hand();
-            cardsInHandOne.getHandCards();
-            Hand cardsInHandTwo = new Hand();
-            cardsInHandTwo.getHandCards();
+            table.getCardsOnTable();
+            Abilities abilities = new Abilities();
 
             StartGameInput startGame = game.getStartGame();
             plyrOne.setIndxOfDeck(startGame.getPlayerOneDeckIdx());
             plyrTwo.setIndxOfDeck(startGame.getPlayerTwoDeckIdx());
-            int shuffleseed = startGame.getShuffleSeed();
             plyrOne.verif_isTurn(startGame.getStartingPlayer());
             plyrTwo.verif_isTurn(startGame.getStartingPlayer());
-
 
             // setting the heros
             Hero heroForOne = new Hero();
             Hero heroForTwo = new Hero();
-
-            heroForOne.setMana(startGame.getPlayerOneHero().getMana());
-            heroForOne.setDescription(startGame.getPlayerOneHero().getDescription());
-            heroForOne.setName(startGame.getPlayerOneHero().getName());
-            heroForOne.setColors(startGame.getPlayerOneHero().getColors());
-
-            heroForTwo.setMana(startGame.getPlayerTwoHero().getMana());
-            heroForTwo.setDescription(startGame.getPlayerTwoHero().getDescription());
-            heroForTwo.setName(startGame.getPlayerTwoHero().getName());
-            heroForTwo.setColors(startGame.getPlayerTwoHero().getColors());
+            initGame.initHero(startGame.getPlayerOneHero(), heroForOne);
+            initGame.initHero(startGame.getPlayerTwoHero(), heroForTwo);
 
             // setting the players
             plyrOne.setHero(heroForOne);
@@ -123,25 +71,21 @@ public class MyMain {
             players.setPlayerOne(plyrOne);
             players.setPlayerTwo(plyrTwo);
 
+
             // setting the chosen decks
+            int shuffleseed = startGame.getShuffleSeed();
+
+            Hand cardsInHandOne = new Hand();
+            cardsInHandOne.getHandCards();
+            Hand cardsInHandTwo = new Hand();
+            cardsInHandTwo.getHandCards();
 
             ChosenDeck chosenDeckForOne = new ChosenDeck();
             ChosenDeck chosenDeckForTwo = new ChosenDeck();
             chosenDeckForOne.createChosenDeck(plyrOne.getIndxOfDeck(), plyrOne.getDecks());
             chosenDeckForTwo.createChosenDeck(plyrTwo.getIndxOfDeck(), plyrTwo.getDecks());
-
-            // randomizing the decks and getting the first card
-            // NRCARDS ESTE DE LA INCEPUT
-            Random rnd1 = new Random(shuffleseed);
-            Collections.shuffle(chosenDeckForOne.getChosenDeck().getCards(), rnd1);
-            cardsInHandOne.getHandCards().getCards().add(chosenDeckForOne.getChosenDeck().getCards().get(0));
-            chosenDeckForOne.getChosenDeck().getCards().remove(0);
-
-
-            Random rnd2 = new Random(shuffleseed);
-            Collections.shuffle(chosenDeckForTwo.getChosenDeck().getCards(), rnd2);
-            cardsInHandTwo.getHandCards().getCards().add(chosenDeckForTwo.getChosenDeck().getCards().get(0));
-            chosenDeckForTwo.getChosenDeck().getCards().remove(0);
+            initGame.initPlayerDeck(chosenDeckForOne, cardsInHandOne, shuffleseed);
+            initGame.initPlayerDeck(chosenDeckForTwo, cardsInHandTwo, shuffleseed);
 
             //pointing out the used decks and adding them to players
             plyrOne.getDecks().getDecksForPlayer().get(plyrOne.getIndxOfDeck()).setWasUsed(true);
@@ -153,83 +97,188 @@ public class MyMain {
             plyrTwo.setPlayerChosenDeck(chosenDeckForTwo);
             plyrOne.setCardsInHand(cardsInHandOne);
             plyrTwo.setCardsInHand(cardsInHandTwo);
-            //MyPrinter printer2 = new MyPrinter();
-            //output.add(printer2.getPlayerDeck(2, players, "getPlayerDeck"));
-
-            // TO DO: de refacut turn-ul, de verificat cartile din hand!
 
             ArrayList<ActionsInput> actions = new ArrayList<ActionsInput>();
             actions = game.getActions();
             MyPrinter printer = new MyPrinter();
             for (ActionsInput action : actions) {
-               switch(action.getCommand()) {
-                   case "getPlayerDeck":
+                switch (action.getCommand()) {
+                    case "getPlayerDeck":
                         int indx = action.getPlayerIdx();
                         output.add(printer.getPlayerDeck(indx, players, "getPlayerDeck"));
                         break;
 
-                   case "getPlayerHero":
+                    case "getPlayerHero":
                         indx = action.getPlayerIdx();
                         output.add(printer.getPlayerHero(indx, players, "getPlayerHero"));
                         break;
-                   case "getPlayerTurn":
+                    case "getPlayerTurn":
                         output.add(printer.getPlayerTurn(players, "getPlayerTurn"));
                         break;
-                   case "endPlayerTurn":
-                       statistics.incrNumberOfTurns();
-                       // la sfarsitul rundei cresc mana
-                       if (statistics.getNumberOfTurns() == 2) {
-                           if (plyrOne.getTurn() == true) {
-                               plyrOne.setTurn(false);
-                               plyrTwo.setTurn(true);
-                               frozenCards.defrozenCards(chosenDeckForOne, 1);
-                           } else {
-                               plyrOne.setTurn(true);
-                               plyrTwo.setTurn(false);
-                               frozenCards.defrozenCards(chosenDeckForTwo, 2);
-                           }
-                           statistics.incrNumberOfRounds();
-                           plyrOne.increaseMana(statistics.getNumberOfRounds());
-                           plyrTwo.increaseMana(statistics.getNumberOfRounds());
-                           plyrOne.addCardsInHand();
-                           plyrTwo.addCardsInHand();
-                           statistics.setNumberOfTurns(0);
-                       } else {
-                           // verific a cui a fost tura, dezghet cartile
-                           if (plyrOne.getTurn() == true) {
-                               plyrOne.setTurn(false);
-                               plyrTwo.setTurn(true);
-                               frozenCards.defrozenCards(chosenDeckForOne, 1);
+                    case "endPlayerTurn":
+                        if (!statistics.isHasFinished()) {
+                            statistics.incrNumberOfTurns();
+                            // la sfarsitul rundei cresc mana
+                            if (statistics.getNumberOfTurns() == 2) {
+                                if (plyrOne.getTurn() == true) {
+                                    plyrOne.setTurn(false);
+                                    plyrTwo.setTurn(true);
+                                    plyrOne.unfreezeCards(table);
+                                    plyrOne.setAttackers(table);
+                                    plyrOne.getHero().setHasAttacked(false);
+                                } else {
+                                    plyrOne.setTurn(true);
+                                    plyrTwo.setTurn(false);
+                                    plyrTwo.unfreezeCards(table);
+                                    plyrTwo.setAttackers(table);
+                                    plyrTwo.getHero().setHasAttacked(false);
+                                }
+                                statistics.incrNumberOfRounds();
+                                if (statistics.getNumberOfRounds() <= 10) {
+                                    plyrOne.increaseMana(statistics.getNumberOfRounds());
+                                    plyrTwo.increaseMana(statistics.getNumberOfRounds());
+                                }
+                                plyrOne.addCardsInHand();
+                                plyrTwo.addCardsInHand();
+                                statistics.setNumberOfTurns(0);
+                            } else {
+                                // verific a cui a fost tura, dezghet cartile
+                                if (plyrOne.getTurn() == true) {
+                                    plyrOne.setTurn(false);
+                                    plyrTwo.setTurn(true);
+                                    plyrOne.unfreezeCards(table);
+                                    plyrOne.setAttackers(table);
+                                    plyrOne.getHero().setHasAttacked(false);
 
-                           }
-                           if (plyrTwo.getTurn() == true) {
-                               plyrOne.setTurn(true);
-                               plyrTwo.setTurn(false);
-                               frozenCards.defrozenCards(chosenDeckForTwo, 2);
-                           }
-                       }
+                                } else if (plyrTwo.getTurn() == true) {
+                                    plyrOne.setTurn(true);
+                                    plyrTwo.setTurn(false);
+                                    plyrTwo.unfreezeCards(table);
+                                    plyrTwo.setAttackers(table);
+                                    plyrTwo.getHero().setHasAttacked(false);
+                                }
+                            }
+                        }
                         break;
-                   case "getCardsInHand":
+                    case "getCardsInHand":
                         indx = action.getPlayerIdx();
-                        output.add(printer.getCardsInHand(indx, players, "getCardsInHand"));
+                        output.add(printer.getCardsInHand(indx, players,
+                                "getCardsInHand"));
                         break;
-                   case "getPlayerMana":
+                    case "getPlayerMana":
                         indx = action.getPlayerIdx();
                         output.add(printer.getPlayerMana(indx, players, "getPlayerMana"));
                         break;
-                   case "placeCard":
+                    case "placeCard":
                         indx = action.getHandIdx();
                         if (plyrOne.getTurn() == true) {
-                            Card card = plyrOne.getCardsInHand().getHandCards().getCards().get(indx);
-                            int verif = printer.verifErorrsPlaceCard(card, indx, "placeCard", players, 1, output, table);
-                            if (verif == 1)
+                            ArrayList<Card> hand = plyrOne.getCardsInHand().getHandCards();
+                            Card card = hand.get(indx);
+                            int verif = printer.verifErorrsPlaceCard(card, indx,
+                                    "placeCard", players, 1, output, table);
+                            if (verif == 1) {
                                 table.placeCard(card, 1, players, indx);
-                        } else {
-                            Card card = plyrTwo.getCardsInHand().getHandCards().getCards().get(indx);
-                            int verif = printer.verifErorrsPlaceCard(card, indx, "placeCard", players, 2, output, table);
-                            if (verif == 1)
+                            }
+                        } else if (plyrTwo.getTurn() == true) {
+                            ArrayList<Card> hand = plyrTwo.getCardsInHand().getHandCards();
+                            Card card = plyrTwo.getCardsInHand().getHandCards().get(indx);
+                            int verif = printer.verifErorrsPlaceCard(card, indx,
+                                    "placeCard", players, 2, output, table);
+                            if (verif == 1) {
                                 table.placeCard(card, 2, players, indx);
+                            }
                         }
+                        break;
+                    case "getCardsOnTable":
+                        output.add(printer.getcardsOnTable(table, "getCardsOnTable"));
+                        break;
+                    case "getEnvironmentCardsInHand":
+                        indx = action.getPlayerIdx();
+                        output.add(printer.getEnvCardsInHand(indx, players,
+                                "getEnvironmentCardsInHand"));
+                        break;
+                    case "useEnvironmentCard":
+                        int indxCard = action.getHandIdx();
+                        int affectedRow = action.getAffectedRow();
+                        if (plyrOne.getTurn() == true) {
+                            Card card = plyrOne.getCardsInHand().getHandCards().get(indxCard);
+                            int verif = printer.verifErrorsUseEnvCard(indxCard, affectedRow, players,
+                                    table, 1, output, "useEnvironmentCard");
+                            if (verif == 1) {
+                                abilities.useAbilitiesForEnvCard(1, indxCard, players, card,
+                                        table, affectedRow);
+                            }
+                        } else {
+                            Card card = plyrTwo.getCardsInHand().getHandCards().get(indxCard);
+                            int verif = printer.verifErrorsUseEnvCard(indxCard, affectedRow, players,
+                                    table, 2, output, "useEnvironmentCard");
+                            if (verif == 1) {
+                                abilities.useAbilitiesForEnvCard(2, indxCard, players, card,
+                                        table, affectedRow);
+                            }
+                        }
+                        break;
+                    case "getCardAtPosition":
+                        int x = action.getX();
+                        int y = action.getY();
+                        output.add(printer.getCardPosition(table, x, y));
+                        break;
+                    case "getFrozenCardsOnTable":
+                        output.add(printer.getFrozenCards(table));
+                        break;
+                    case "cardUsesAttack":
+                        int myX = action.getCardAttacker().getX();
+                        int myY = action.getCardAttacker().getY();
+                        x = action.getCardAttacked().getX();
+                        y = action.getCardAttacked().getY();
+                        int verif = printer.verifCardUsesAttack(myX, myY, x, y, table, output);
+                        if (verif == 1)
+                            abilities.useAttack(myX, myY, x, y, table);
+                        break;
+                    case "cardUsesAbility":
+                        myX = action.getCardAttacker().getX();
+                        myY = action.getCardAttacker().getY();
+                        x = action.getCardAttacked().getX();
+                        y = action.getCardAttacked().getY();
+                        verif = printer.verifCardUsesAbility(myX, myY, x, y, table, output);
+                        if (verif == 1)
+                            abilities.useAbilitiesForMinionCard(myX, myY, x, y, table);
+                        break;
+                    case "useAttackHero":
+                        x = action.getCardAttacker().getX();
+                        y = action.getCardAttacker().getY();
+                        verif = printer.verifUseAttackHero(x, y, table, output);
+                        if (verif == 1) {
+                            int death = abilities.useAttackHero(x, y, table, players);
+                            printer.verifDeathHero(x, death, statistics, output);
+                            if (death == 0) {
+                                statistics.setHasFinished(true);
+                            }
+                        }
+                        break;
+                    case "useHeroAbility":
+                        affectedRow = action.getAffectedRow();
+                        if (plyrOne.getTurn()) {
+                            verif = printer.verifUseHeroAbility(1, players, affectedRow,output);
+                            if (verif == 1)
+                                abilities.useAbilityHero(affectedRow, 1, players, table);
+                        } else {
+                            verif = printer.verifUseHeroAbility(2, players, affectedRow,output);
+                            if (verif == 1)
+                                abilities.useAbilityHero(affectedRow, 2, players, table);
+                        }
+                        break;
+                    case "getPlayerOneWins":
+                        output.add(printer.printWonGames(statistics, 1, "getPlayerOneWins"));
+                        break;
+                    case "getPlayerTwoWins":
+                        output.add(printer.printWonGames(statistics, 2, "getPlayerTwoWins"));
+                        break;
+                    case "getTotalGamesPlayed":
+                        ObjectNode node = JsonNodeFactory.instance.objectNode();
+                        node.put("command", "getTotalGamesPlayed");
+                        node.put("output", statistics.getNumberOfWonGamesOne() + statistics.getNumberOfWonGamesTwo());
+                        output.add(node);
                         break;
                 }
             }

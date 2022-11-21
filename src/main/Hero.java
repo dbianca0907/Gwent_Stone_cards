@@ -9,7 +9,23 @@ public class Hero {
     private int health = 30;
     private ArrayList<String> colors;
 
+    boolean hasAttacked = false;
+
+    public void attacked(int counter) {
+        int life = getHealth() - counter;
+        setHealth(life);
+    }
+
     // getters and setters
+
+
+    public boolean isHasAttacked() {
+        return hasAttacked;
+    }
+
+    public void setHasAttacked(boolean hasAttacked) {
+        this.hasAttacked = hasAttacked;
+    }
 
     public void setMana(int mana) {
         this.mana = mana;
@@ -25,6 +41,10 @@ public class Hero {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public void setName(String name) {

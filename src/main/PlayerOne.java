@@ -1,5 +1,5 @@
 package main;
-// de vazut cum se creste mana si de setat la inceputul jocului in functie de mana primita
+import java.util.*;
 public class PlayerOne {
     Hand cardsInHand = null;
     public int mana = 1;
@@ -20,11 +20,24 @@ public class PlayerOne {
 
     public void addCardsInHand() {
         if ( getPlayerChosenDeck().getChosenDeck().getCards().isEmpty() == false) {
-            getCardsInHand().getHandCards().getCards().add(getPlayerChosenDeck().getChosenDeck().getCards().get(0));
+            getCardsInHand().getHandCards().add(getPlayerChosenDeck().getChosenDeck().getCards().get(0));
             getPlayerChosenDeck().getChosenDeck().getCards().remove(0);
         }
     }
 
+    public void unfreezeCards (Table table) {
+        for (int j = 0; j < table.getCardsOnTable().get(2).size(); j++)
+            table.getCardsOnTable().get(2).get(j).setFrozen(false);
+        for (int j = 0; j < table.getCardsOnTable().get(3).size(); j++)
+            table.getCardsOnTable().get(3).get(j).setFrozen(false);
+    }
+
+    public void setAttackers (Table table) {
+        for (int j = 0; j < table.getCardsOnTable().get(2).size(); j++)
+            table.getCardsOnTable().get(2).get(j).setHasAttacked(false);
+        for (int j = 0; j < table.getCardsOnTable().get(3).size(); j++)
+            table.getCardsOnTable().get(3).get(j).setHasAttacked(false);
+    }
 
     // constructors
 
@@ -81,7 +94,8 @@ public class PlayerOne {
     }
 
     public void setPlayerChosenDeck(ChosenDeck chosenDeck) {
-        this.chosenDeck = chosenDeck;
+        for (int i = 0; i < chosenDeck.getChosenDeck().getCards().size(); i++)
+            getPlayerChosenDeck().getChosenDeck().getCards().add(chosenDeck.getChosenDeck().getCards().get(i));
     }
 
     public void setTurn(boolean turn) {
@@ -93,8 +107,8 @@ public class PlayerOne {
     }
 
     public void setCardsInHand(Hand cardsInHand) {
-        Card card = cardsInHand.getHandCards().getCards().get(0);
-        getCardsInHand().getHandCards().getCards().add(card);
+        Card card = cardsInHand.getHandCards().get(0);
+        getCardsInHand().getHandCards().add(card);
     }
 
     public int getMana() {

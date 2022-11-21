@@ -18,13 +18,23 @@ public class Card {
     @JsonIgnore
     boolean isFrozen = false;
     @JsonIgnore
-    boolean hasAbilities = false;
+    boolean hasAttacked = false;
     @JsonIgnore
     int type = 0;
     int specificRow;
 
     public void attacked(int counter) {
-        mana = mana - counter;
+        setHealth(getHealth() - counter);
+    }
+    public void incrHealth() {
+        setHealth(getHealth() + 1);
+    }
+    public void incrMana () {
+        setMana(getMana() + 1);
+    }
+
+    public void incrAttack() {
+        setAttackDamage(getAttackDamage() + 1);
     }
 
     // imi verifica daca o carte este Tank, are abilitati, a fost sau nu inghetata
@@ -33,7 +43,6 @@ public class Card {
         if (name.equals("The Ripper") || name.equals("Miraj") ||
                 name.equals("The Cursed One") || name.equals("Disciple")) {
             type = 1;
-            hasAbilities = true;
         } else if (name.equals("Goliath") || name.equals("Warden")) {
             type = 1;
             Tank = true;
@@ -104,7 +113,7 @@ public class Card {
         return Tank;
     }
 
-    public boolean isFrozen() {
+    public boolean getFrozen() {
         return isFrozen;
     }
 
@@ -115,6 +124,16 @@ public class Card {
     public int getSpecificRow() {
         return specificRow;
     }
+
+    public void setHasAttacked(boolean hasAttacked) {
+        this.hasAttacked = hasAttacked;
+    }
+
+    public boolean getHasAttacked() {
+        return hasAttacked;
+    }
+
+
 
     public void setSpecificRow (String name, int indx) {
         if (getType() != 1)
@@ -133,4 +152,5 @@ public class Card {
         }
 
     }
+
 }
