@@ -1,4 +1,4 @@
-package main;
+package main.Players;
 
 public class Player {
     private PlayerOne playerOne = null;

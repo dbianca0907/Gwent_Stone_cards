@@ -1,4 +1,4 @@
-package main;
+package main.Cards;
 
 import java.util.ArrayList;
 
@@ -20,8 +20,6 @@ public class Hero {
         int life = getHealth() - counter;
         setHealth(life);
     }
-
-    // getters and setters
 
     /**
      * setter

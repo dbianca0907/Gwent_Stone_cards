@@ -2,13 +2,20 @@ package main;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import main.Cards.Card;
+import main.Cards.Hero;
+import main.Decks.Table;
+import main.GamePreps.GameStatistics;
+import main.Players.Player;
+import main.Players.PlayerOne;
+import main.Players.PlayerTwo;
 
 import java.util.ArrayList;
 
 public class MyPrinter {
 
     /**
-     * method for making an ibject from a card
+     * method for making an ObjectNode from a card
      * @param card to print
      * @return ObjectNode with all the information
      */
@@ -42,7 +49,7 @@ public class MyPrinter {
     }
 
     /**
-     * make an arrayNode with all de cards from a deck
+     * make an arrayNode with all the ObjectNodes cards from a deck
      * @param deck to print
      * @return arrayNode (deck)
      */
@@ -76,7 +83,7 @@ public class MyPrinter {
     }
 
     /**
-     * print for "getPlayerDeck" command
+     * printing the deck of a player
      * @param indx player
      * @param players all the players
      * @return ObjectNode(chosen deck of the player)
@@ -450,8 +457,7 @@ public class MyPrinter {
     }
 
     /**
-     * method for printing the errors in the attack command
-     * and verifying if there are errors or not
+     * Verifying and printing the errors in the attack command
      * @param myX coordinate of the current player's card
      * @param myY  coordinate of the current player's card
      * @param x coordinate of the attacked card
@@ -510,8 +516,7 @@ public class MyPrinter {
     }
 
     /**
-     * method for printing the errors in the "using ability of a card" command
-     * and verifying if there are errors or not
+     * verifying and printing the errors in the "using ability of a card" command
      * @param myX coordinate of the current player's card
      * @param myY  coordinate of the current player's card
      * @param x coordinate of the attacked card
@@ -575,7 +580,7 @@ public class MyPrinter {
     }
 
     /**
-     *  method for printing the errors for "useAttackHero" command
+     * printing the errors for "useAttackHero" command
      * @param x coordinate of the card that is attacking the hero
      * @param y coordinate of the card that is attacking the hero
      * @param table all the cards on the table
@@ -635,7 +640,7 @@ public class MyPrinter {
      * @param output arrayNode from Main
      */
     public void verifDeathHero(final int x, final int death,
-                                final GameStatistics statistics, final ArrayNode output) {
+                               final GameStatistics statistics, final ArrayNode output) {
         if (death == 1) {
             ObjectNode node = JsonNodeFactory.instance.objectNode();
             if (x < 2) {

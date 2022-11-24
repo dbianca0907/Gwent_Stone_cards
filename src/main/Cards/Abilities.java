@@ -1,11 +1,14 @@
-package main;
+package main.Cards;
+
+import main.Decks.Table;
+import main.Players.Player;
 
 import java.util.ArrayList;
 
 public class Abilities {
 
     /**
-     * method for using the ability of a hero
+     * using the ability of a hero
      * @param affectedRow from input
      * @param indx of the player
      * @param players contains both of my players
@@ -40,12 +43,12 @@ public class Abilities {
     }
 
     /**
-     * the attack of a Hero by a Minion Card
+     * The card Minion attack on a Hero
      * @param x coordinate of my card from the table
      * @param y coordinate of the card from the table
      * @param table all the card from the table
      * @param players all my players
-     * @return 1, if the hero didn't die
+     * @return 1, if the hero didn't die, 0 otherwise
      */
 
     public int useAttackHero(final int x, final int y, final Table table, final Player players) {
@@ -84,7 +87,7 @@ public class Abilities {
     }
 
     /**
-     *
+     * using the ability of a minion
      * @param xMyCard coordinate of my card
      * @param yMyCard coordinate of my card
      * @param x coordinate of the attacked card
@@ -115,7 +118,7 @@ public class Abilities {
     }
 
     /**
-     *
+     * using the ability of an environment card
      * @param indx of the player, for decreasing the mana of the player
      * @param indxCard the position of the card in hand
      * @param player all players
@@ -140,7 +143,7 @@ public class Abilities {
     }
 
     /**
-     * finds the cards from a table based on the coordinates
+     * finds the cards from the table based on the coordinates
      * @param x coordinate of the card
      * @param y coordinate of the card
      * @param table all the cards on the table
@@ -152,7 +155,7 @@ public class Abilities {
         }
 
     /**
-     * method for decreasing mana for the Hero
+     * method for decreasing Hero's mana
      * @param indx
      * @param players
      */
@@ -190,7 +193,7 @@ public class Abilities {
     }
 
     /**
-     * using the ability of UseThorina hero
+     * using the ability of Thorina hero
      * @param table all the cards ont the table
      * @param affectedRow from input
      * @param indx the index of the player for decreasing mana
@@ -286,7 +289,7 @@ public class Abilities {
     }
 
     /**
-     *
+     * using the ability of Disciple
      * @param card the attacked card
      */
     public void useDisciple(final Card card) {
@@ -313,7 +316,7 @@ public class Abilities {
     }
 
     /**
-     *
+     * using the ability of Firsetorm
      * @param indx player for decreasing mana
      * @param indxCard in the player's hand
      * @param card Firestorm card for decreasing mana
@@ -340,7 +343,7 @@ public class Abilities {
     }
 
     /**
-     *
+     * using the ability of WinterFell
      * @param indx player for decreasing mana
      * @param indxCard in the player's hand
      * @param card UseWinterfell card for decreasing mana
@@ -358,7 +361,7 @@ public class Abilities {
     }
 
     /**
-     *
+     * using the ability of Heart Hound
      * @param indx player for decreasing mana
      * @param indxCard in the player's hand
      * @param card Firestorm card for decreasing mana
@@ -392,6 +395,7 @@ public class Abilities {
                 break;
             default:
         }
+
         Card cardOnTable = table.getCardsOnTable().get(affectedRow).get(maxIndx);
         table.getCardsOnTable().get(myIndx).add(cardOnTable);
         table.getCardsOnTable().get(affectedRow).remove(maxIndx);

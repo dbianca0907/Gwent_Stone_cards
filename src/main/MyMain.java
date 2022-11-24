@@ -8,8 +8,21 @@ import fileio.ActionsInput;
 
 import java.util.ArrayList;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import main.Cards.Abilities;
+import main.Cards.Card;
+import main.Decks.Table;
+import main.GamePreps.GameInitialize;
+import main.GamePreps.GameStatistics;
+import main.Players.Player;
+import main.Players.PlayerOne;
+import main.Players.PlayerTwo;
 
 public class MyMain {
+    /**
+     * the main class of the implemented code
+     * @param input
+     * @param output
+     */
     public static void main(final Input input, final ArrayNode output) {
         GameStatistics statistics = new GameStatistics();
         ArrayList<GameInput> games = new ArrayList<GameInput>();
@@ -54,7 +67,7 @@ public class MyMain {
                     case "endPlayerTurn":
                         if (!statistics.isHasFinished()) {
                             statistics.incrNumberOfTurns();
-                            // final of the round
+                            // after 1 round
                             if (statistics.getNumberOfTurns() == 2) {
                                 if (plyrOne.getTurn()) {
                                     plyrOne.setTurn(false);
@@ -79,7 +92,7 @@ public class MyMain {
                                 plyrTwo.addCardsInHand();
                                 statistics.setNumberOfTurns(0);
                             } else {
-                                // final of each player's turn
+                                // after a turn
                                 if (plyrOne.getTurn()) {
                                     plyrOne.setTurn(false);
                                     plyrTwo.setTurn(true);

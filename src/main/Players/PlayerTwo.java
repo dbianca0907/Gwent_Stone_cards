@@ -1,4 +1,11 @@
-package main;
+package main.Players;
+
+import main.Cards.Card;
+import main.Cards.Hero;
+import main.Decks.ChosenDeck;
+import main.Decks.DecksForPlayer;
+import main.Decks.Hand;
+import main.Decks.Table;
 
 import java.util.ArrayList;
 
@@ -29,7 +36,7 @@ public class PlayerTwo {
     }
 
     /**
-     * adding the cards int player one's hand after every turn
+     * adding the cards in player one's hand after every turn
      */
     public void addCardsInHand() {
         if (!getPlayerChosenDeck().getChosenDeck().getCards().isEmpty()) {
@@ -62,7 +69,7 @@ public class PlayerTwo {
     }
 
     /**
-     * marking that the plyaer's cards can attack after his turn
+     * unmarking the a card attacked, after a turn
      * @param table
      */
     public void setAttackers(final Table table) {
@@ -74,7 +81,7 @@ public class PlayerTwo {
         }
     }
 
-    // constructors
+
     /**
      * constructor
      * @return decks
@@ -110,8 +117,6 @@ public class PlayerTwo {
         return chosenDeck;
     }
 
-
-    // setters and getters
 
     /**
      * setter

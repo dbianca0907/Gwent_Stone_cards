@@ -1,11 +1,14 @@
-package main;
+package main.Decks;
+
+import main.Cards.Card;
+import main.Players.Player;
 
 import java.util.ArrayList;
 public class Table {
     private ArrayList<ArrayList<Card>> cardsOnTable = null;
 
     /**
-     * adding cards on the rows of player one
+     * adding cards on the table for player one
      * @param card
      */
     public void addCardsOnTableForOne(final Card card) {
@@ -19,7 +22,7 @@ public class Table {
     }
 
     /**
-     * adding cards on the rows of player two
+     * adding cards on the table for player two
      * @param card
      */
     public void addCardsOnTableForTwo(final Card card) {
@@ -32,7 +35,7 @@ public class Table {
     }
 
     /**
-     * place card on the table
+     * place card on the table, based on their characteristics
      * @param card that is placed
      * @param indxPlayer index of the player
      * @param players all the players

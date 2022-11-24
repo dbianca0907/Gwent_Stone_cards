@@ -1,4 +1,4 @@
-package main;
+package main.GamePreps;
 public class GameStatistics {
     private int numberOfTurns = 0;
     private int numberOfWonGamesOne = 0;
@@ -7,8 +7,8 @@ public class GameStatistics {
     private boolean hasFinished = false;
 
     /**
-     * total number of games
-     * @return
+     *
+     * @return total number of games
      */
     public int getTotal() {
         return getNumberOfWonGamesOne() + getNumberOfWonGamesTwo();
@@ -42,8 +42,6 @@ public class GameStatistics {
     public void incrNumberOfRounds() {
         numberOfRounds++;
     }
-
-    //getters and setters
 
     /**
      * getter

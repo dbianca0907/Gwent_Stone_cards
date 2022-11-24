@@ -1,9 +1,8 @@
 Starting audit...
-[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\Hero.java:9:26: '30' is a magic number. [MagicNumber]
-[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\MyMain.java:12:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
-[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\MyMain.java:13:5: Method length is 216 lines (max allowed is 150). [MethodLength]
-[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\MyMain.java:13:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\PlayerOne.java:37: Line is longer than 100 characters (found 105). [LineLength]
-[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\PlayerTwo.java:36: Line is longer than 100 characters (found 105). [LineLength]
+[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\Cards\Hero.java:9:26: '30' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\MyMain.java:20:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\MyMain.java:26:5: Method length is 216 lines (max allowed is 150). [MethodLength]
+[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\Players\PlayerOne.java:44: Line is longer than 100 characters (found 105). [LineLength]
+[ERROR] C:\Users\Dbian\Desktop\Gwent_Stone_cards\.\src\main\Players\PlayerTwo.java:43: Line is longer than 100 characters (found 105). [LineLength]
 Audit done.
-Checkstyle ends with 6 errors.
+Checkstyle ends with 5 errors.

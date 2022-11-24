@@ -1,4 +1,4 @@
-package main;
+package main.Cards;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class Card {
     }
 
     /**
-     * increases attack damage of the card
+     * increases attack damage
      */
     public void incrAttack() {
         setAttackDamage(getAttackDamage() + 1);
@@ -95,8 +95,6 @@ public class Card {
 
     }
 
-
-    // getters and setters
 
     /**
      * setter

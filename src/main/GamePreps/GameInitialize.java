@@ -1,8 +1,17 @@
-package main;
+package main.GamePreps;
 import fileio.DecksInput;
 import fileio.CardInput;
 import fileio.StartGameInput;
 import fileio.Input;
+import main.Cards.Card;
+import main.Cards.Hero;
+import main.Decks.ChosenDeck;
+import main.Decks.Deck;
+import main.Decks.DecksForPlayer;
+import main.Decks.Hand;
+import main.Players.Player;
+import main.Players.PlayerOne;
+import main.Players.PlayerTwo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +24,7 @@ public class GameInitialize {
      * @param deckInit input
      * @return array of decks
      */
-    public  DecksForPlayer initDecksForPLayer(final DecksInput deckInit) {
+    public DecksForPlayer initDecksForPLayer(final DecksInput deckInit) {
         DecksForPlayer groupDecksPlyrOne = new DecksForPlayer();
         groupDecksPlyrOne.setNrDecks(deckInit.getNrDecks());
         groupDecksPlyrOne.setNrCardsInDecks(deckInit.getNrCardsInDeck());
@@ -74,6 +83,7 @@ public class GameInitialize {
 
     /**
      * randomize the chosen deck and prepare it for the game
+     * extract the first card and adding it in the player's "Hand"
      * @param deck chosen deck
      * @param hand array list of cards in my hands
      * @param seed shuffle seed

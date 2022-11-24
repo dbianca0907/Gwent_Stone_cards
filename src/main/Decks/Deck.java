@@ -1,4 +1,6 @@
-package main;
+package main.Decks;
+import main.Cards.Card;
+
 import java.util.ArrayList;
 
 public class Deck {
@@ -16,9 +18,6 @@ public class Deck {
         }
         return cards;
     }
-
-
-    // setters
 
     /**
      * setter

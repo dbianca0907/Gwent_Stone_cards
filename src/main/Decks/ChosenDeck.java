@@ -1,4 +1,6 @@
-package main;
+package main.Decks;
+
+import main.Cards.Card;
 
 import java.util.ArrayList;
 
@@ -6,7 +8,7 @@ public class ChosenDeck {
     private Deck chosenDeck = null;
 
     /**
-     * creates the chosen deck by the player
+     * creates the deck that was chosen by the player
      * @param indx of the player
      * @param allDecks all decks
      */
