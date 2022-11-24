@@ -71,7 +71,7 @@ public final class Main {
 
         //TODO add here the entry point to your implementation
         MyMain implement = new MyMain();
-        implement.main(inputData, output, objectMapper);
+        implement.main(inputData, output);
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);

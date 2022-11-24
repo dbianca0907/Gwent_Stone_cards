@@ -1,156 +1,253 @@
 package main;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.*;
+import java.util.ArrayList;
 
-// de verificat daca au ceva metodele fara static de la mana
 public class Card {
-    public int mana;
+    private int mana;
     private int health;
     private int attackDamage;
     private String description;
     private ArrayList<String> colors;
     private String name;
+    private boolean isTank = false;
+    private boolean isFrozen = false;
+    private boolean hasAttacked = false;
+    private int type = 0;
+    private int specificRow;
 
-    // daca nu mai sunt final, de adaugat in ChosenDeck si la parsare
-    @JsonIgnore
-    boolean Tank = false;
-    @JsonIgnore
-    boolean isFrozen = false;
-    @JsonIgnore
-    boolean hasAttacked = false;
-    @JsonIgnore
-    int type = 0;
-    int specificRow;
+    /**
+     * decrease mana after the card was attacked
+     * @param counter
+     */
+    public void attacked(final int counter) {
 
-    public void attacked(int counter) {
         setHealth(getHealth() - counter);
     }
+
+    /**
+     * increases health
+     */
     public void incrHealth() {
         setHealth(getHealth() + 1);
     }
-    public void incrMana () {
-        setMana(getMana() + 1);
-    }
 
+    /**
+     * increases attack damage of the card
+     */
     public void incrAttack() {
         setAttackDamage(getAttackDamage() + 1);
     }
 
-    // imi verifica daca o carte este Tank, are abilitati, a fost sau nu inghetata
 
-    public void getTheType(String name) {
-        if (name.equals("The Ripper") || name.equals("Miraj") ||
-                name.equals("The Cursed One") || name.equals("Disciple")) {
+    /**
+     * set the Type of the card and verify if it is Tank type
+     * 1 = minion Card
+     * 2 = environment Card
+     * 3 = Hero
+     * @param nameCard of the Card
+     */
+    public void getTheType(final String nameCard) {
+        final int typeHero = 3;
+        if (nameCard.equals("The Ripper")
+                || nameCard.equals("Miraj")
+                || nameCard.equals("The Cursed One")
+                || nameCard.equals("Disciple")) {
             type = 1;
-        } else if (name.equals("Goliath") || name.equals("Warden")) {
+        } else if (nameCard.equals("Goliath")
+                || nameCard.equals("Warden")) {
             type = 1;
-            Tank = true;
-        }else if (name.equals("Sentinel") || name.equals("Berserker")) {
+            isTank = true;
+        } else if (nameCard.equals("Sentinel")
+                || nameCard.equals("Berserker")) {
             type = 1;
-        } else if (name.equals("Firestorm") || name.equals ("Winterfell") || name.equals("Heart Hound")) {
+        } else if (nameCard.equals("Firestorm")
+                || nameCard.equals("Winterfell")
+                || nameCard.equals("Heart Hound")) {
             type = 2;
         } else {
-            type = 3;
+            type = typeHero;
         }
+    }
+
+    /**
+     * setting the specific rows for cards
+     * @param nameCard of card
+     * @param indx of player
+     */
+    public void setSpecificRow(final String nameCard, final int indx) {
+        final int lastRow = 3;
+        if (nameCard.equals("The Ripper")
+                || nameCard.equals("Miraj")
+                || nameCard.equals("Goliath")
+                || nameCard.equals("Warden")) {
+            if (indx == 1) {
+                specificRow = 2;
+            } else {
+                specificRow = 1;
+            }
+        } else {
+            if (indx == 1) {
+                specificRow = lastRow;
+            } else {
+                specificRow = 0;
+            }
+        }
+
     }
 
 
     // getters and setters
-    public void setDescription(String description) {
+
+    /**
+     * setter
+     * @param description
+     */
+    public void setDescription(final String description) {
         this.description = description;
     }
 
-    public void setColors(ArrayList<String> colors) {
+    /**
+     * setter
+     * @param colors
+     */
+    public void setColors(final ArrayList<String> colors) {
         this.colors = colors;
     }
 
-    public void setMana(int mana) {
+    /**
+     * setter
+     * @param mana for card
+     */
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
-    public void setHealth(int health) {
+    /**
+     * setter
+     * @param health of card
+     */
+    public void setHealth(final int health) {
         this.health = health;
     }
 
-    public void setAttackDamage(int attackDamage) {
+    /**
+     * setter
+     * @param attackDamage of card
+     */
+    public void setAttackDamage(final int attackDamage) {
         this.attackDamage = attackDamage;
     }
 
-    public void setName(String name) {
+    /**
+     * setter
+     * @param name of card
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * setter
+     * @param frozen
+     */
+    public void setFrozen(final boolean frozen) {
+        isFrozen = frozen;
+    }
+
+    /**
+     * setter
+     * @param hasAttacked
+     */
+    public void setHasAttacked(final boolean hasAttacked) {
+        this.hasAttacked = hasAttacked;
+    }
+
+    /**
+     * getter
+     * @return mana
+     */
     public  int getMana() {
         return mana;
     }
 
+    /**
+     * getter
+     * @return health
+     */
     public  int getHealth() {
         return health;
     }
 
+    /**
+     * getter
+     * @return attack
+     */
     public  int getAttackDamage() {
         return attackDamage;
     }
 
+    /**
+     * getter
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * getter
+     * @return colors
+     */
     public ArrayList<String> getColors() {
         return colors;
     }
 
+    /**
+     * getter
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * getter
+     * @return type
+     */
     public int getType() {
         return type;
     }
 
+    /**
+     * getter
+     * @return Tank
+     */
     public boolean isTank() {
-        return Tank;
+        return isTank;
     }
 
+    /**
+     * getter
+     * @return frozen
+     */
     public boolean getFrozen() {
         return isFrozen;
     }
 
-    public void setFrozen(boolean frozen) {
-        isFrozen = frozen;
-    }
-
+    /**
+     * getter
+     * @return specific Row for each card
+     */
     public int getSpecificRow() {
         return specificRow;
     }
 
-    public void setHasAttacked(boolean hasAttacked) {
-        this.hasAttacked = hasAttacked;
-    }
-
+    /**
+     * getter
+     * @return
+     */
     public boolean getHasAttacked() {
         return hasAttacked;
-    }
-
-
-
-    public void setSpecificRow (String name, int indx) {
-        if (getType() != 1)
-            specificRow = -1;
-        if (name.equals("The Ripper") || name.equals("Miraj") ||
-                name.equals("Goliath") || name.equals("Warden")) {
-            if (indx == 1)
-                specificRow = 2;
-            else
-                specificRow = 1;
-        } else {
-            if (indx == 1)
-                specificRow = 3;
-            else
-                specificRow = 0;
-        }
-
     }
 
 }

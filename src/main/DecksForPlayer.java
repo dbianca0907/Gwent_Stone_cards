@@ -1,12 +1,16 @@
 package main;
-import java.util.*;
+import java.util.ArrayList;
 
 public class DecksForPlayer {
 
     private int nrDecks;
     private int nrCardsInDecks;
-    ArrayList<Deck> decks = null;
+    private ArrayList<Deck> decks = null;
 
+    /**
+     *
+     * @return decks
+     */
     public ArrayList<Deck> getDecksForPlayer() {
         if (decks == null) {
             decks = new ArrayList<Deck>();
@@ -15,18 +19,37 @@ public class DecksForPlayer {
         return decks;
     }
 
+    // setters and getters
+
+    /**
+     * getter
+     * @return number of decksa
+     */
     public int getNrDecks() {
         return nrDecks;
     }
 
+    /**
+     * getter
+     * @return number of cards
+     */
     public int getNrCardsInDecks() {
         return nrCardsInDecks;
     }
 
-    public void setNrDecks(int nrDecks) {this.nrDecks = nrDecks;
+    /**
+     * setter
+     * @param nrDecks number of Decks
+     */
+    public void setNrDecks(final int nrDecks) {
+        this.nrDecks = nrDecks;
     }
 
-    public void setNrCardsInDecks(int nrCardsInDecks) {
+    /**
+     * setter
+     * @param nrCardsInDecks number of cards
+     */
+    public void setNrCardsInDecks(final int nrCardsInDecks) {
         this.nrCardsInDecks = nrCardsInDecks;
     }
 }

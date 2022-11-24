@@ -3,19 +3,17 @@ package main;
 import java.util.ArrayList;
 
 public class Hand {
-    ArrayList<Card> handCards = null;;
+    private ArrayList<Card> handCards = null;;
 
+    /**
+     * constructor
+     * @return array of cards
+     */
     public ArrayList<Card> getHandCards() {
         if (handCards == null) {
             handCards = new ArrayList<Card>();
             return handCards;
         }
         return handCards;
-    }
-
-    //generate getters and setters
-
-    public void setHandCards(ArrayList<Card> handCards) {
-        this.handCards = handCards;
     }
 }

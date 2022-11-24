@@ -1,45 +1,84 @@
 package main;
-//DACA DAI COPY PASTE SE MODIFICA ISTURN
+
+import java.util.ArrayList;
+
 public class PlayerTwo {
-    Hand cardsInHand = null;
-    public int mana = 1;
-    DecksForPlayer decks = null;
-    ChosenDeck chosenDeck = null;
-    Hero hero;
+    private Hand cardsInHand = null;
+    private int mana = 1;
+    private DecksForPlayer decks = null;
+    private ChosenDeck chosenDeck = null;
+    private Hero hero;
     private int indxOfDeck;
     private boolean isTurn = false;
 
-    public void verif_isTurn(int number) {
-        if (number == 2)
+    /**
+     * set the turn of a player
+     * @param number index of the player
+     */
+    public void verifIsTurn(final int number) {
+        if (number == 2) {
             isTurn = true;
+        }
     }
-
-    public void increaseMana(int counter) {
+    /**
+     * increases the mana after each round
+     * @param counter
+     */
+    public void increaseMana(final int counter) {
         mana = mana + counter;
     }
 
+    /**
+     * adding the cards int player one's hand after every turn
+     */
     public void addCardsInHand() {
-        if (getPlayerChosenDeck().getChosenDeck().getCards().isEmpty() == false) {
+        if (!getPlayerChosenDeck().getChosenDeck().getCards().isEmpty()) {
             getCardsInHand().getHandCards().add(getPlayerChosenDeck().getChosenDeck().getCards().get(0));
             getPlayerChosenDeck().getChosenDeck().getCards().remove(0);
         }
     }
 
-    public void unfreezeCards (Table table) {
-        for (int j = 0; j < table.getCardsOnTable().get(0).size(); j++)
-            table.getCardsOnTable().get(0).get(j).setFrozen(false);
-        for (int j = 0; j < table.getCardsOnTable().get(1).size(); j++)
-            table.getCardsOnTable().get(1).get(j).setFrozen(false);
+    /**
+     * setting the first card in hand at the beginning of a game
+     * @param cardsInHand
+     */
+    public void setCardsInHand(final Hand cardsInHand) {
+
+        Card card = cardsInHand.getHandCards().get(0);
+        getCardsInHand().getHandCards().add(card);
     }
 
-    public void setAttackers (Table table) {
-        for (int j = 0; j < table.getCardsOnTable().get(0).size(); j++)
+    /**
+     * setting the cards unfreeze after a turn
+     * @param table
+     */
+    public void unfreezeCards(final Table table) {
+        for (int j = 0; j < table.getCardsOnTable().get(0).size(); j++) {
+            table.getCardsOnTable().get(0).get(j).setFrozen(false);
+        }
+        for (int j = 0; j < table.getCardsOnTable().get(1).size(); j++) {
+            table.getCardsOnTable().get(1).get(j).setFrozen(false);
+        }
+    }
+
+    /**
+     * marking that the plyaer's cards can attack after his turn
+     * @param table
+     */
+    public void setAttackers(final Table table) {
+        for (int j = 0; j < table.getCardsOnTable().get(0).size(); j++) {
             table.getCardsOnTable().get(0).get(j).setHasAttacked(false);
-        for (int j = 0; j < table.getCardsOnTable().get(1).size(); j++)
+        }
+        for (int j = 0; j < table.getCardsOnTable().get(1).size(); j++) {
             table.getCardsOnTable().get(1).get(j).setHasAttacked(false);
+        }
     }
 
     // constructors
+    /**
+     * constructor
+     * @return decks
+     */
     public DecksForPlayer getDecks() {
         if (decks == null) {
             decks = new DecksForPlayer();
@@ -48,6 +87,10 @@ public class PlayerTwo {
         return decks;
     }
 
+    /**
+     * constructor
+     * @return
+     */
     public Hand getCardsInHand() {
         if (cardsInHand == null) {
             cardsInHand = new Hand();
@@ -55,7 +98,10 @@ public class PlayerTwo {
         }
         return cardsInHand;
     }
-
+    /**
+     * constructor
+     * @return
+     */
     public ChosenDeck getPlayerChosenDeck() {
         if (chosenDeck == null) {
             chosenDeck = new ChosenDeck();
@@ -64,55 +110,88 @@ public class PlayerTwo {
         return chosenDeck;
     }
 
+
     // setters and getters
 
-
-    public void setIndxOfDeck(int indx) {
+    /**
+     * setter
+     * @param indx
+     */
+    public void setIndxOfDeck(final int indx) {
         this.indxOfDeck = indx;
     }
 
-    public void setDecks(DecksForPlayer decks) {
+    /**
+     * setter
+     * @param decks
+     */
+    public void setDecks(final DecksForPlayer decks) {
         this.decks = decks;
     }
 
-    public Hero getHero() {
-        return hero;
-    }
-
-    public boolean getTurn() {
-        return isTurn;
-    }
-
-    public void setHero(Hero hero) {
+    /**
+     * setter
+     * @param hero
+     */
+    public void setHero(final Hero hero) {
         this.hero = hero;
     }
 
+    /**
+     * setter
+     * @param plyrDeck
+     */
+    public void setPlayerChosenDeck(final ChosenDeck plyrDeck) {
+        ArrayList<Card> cards = getPlayerChosenDeck().getChosenDeck().getCards();
+        for (int i = 0; i < plyrDeck.getChosenDeck().getCards().size(); i++) {
+            cards.add(plyrDeck.getChosenDeck().getCards().get(i));
+        }
+    }
+    /**
+     * setter
+     * @param turn
+     */
+    public void setTurn(final boolean turn) {
+        isTurn = turn;
+    }
 
+    /**
+     * setter
+     * @param mana
+     */
+    public void setMana(final int mana) {
+        this.mana = mana;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public int getMana() {
+        return mana;
+    }
+
+    /**
+     * getter
+     * @return
+     */
     public int getIndxOfDeck() {
         return indxOfDeck;
     }
 
-    public void setPlayerChosenDeck(ChosenDeck chosenDeck) {
-        for (int i = 0; i < chosenDeck.getChosenDeck().getCards().size(); i++)
-            getPlayerChosenDeck().getChosenDeck().getCards().add(chosenDeck.getChosenDeck().getCards().get(i));
+    /**
+     * getter
+     * @return
+     */
+    public Hero getHero() {
+        return hero;
     }
 
-    public void setTurn(boolean turn) {
-        isTurn = turn;
-    }
-
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
-
-    // se seteaza doar la inceput
-    public void setCardsInHand(Hand cardsInHand) {
-
-        Card card = cardsInHand.getHandCards().get(0);
-        getCardsInHand().getHandCards().add(card);
-    }
-
-    public  int getMana() {
-        return mana;
+    /**
+     * getter
+     * @return
+     */
+    public  boolean getTurn() {
+        return isTurn;
     }
 }

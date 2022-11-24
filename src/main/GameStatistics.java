@@ -1,80 +1,118 @@
 package main;
-import java.util.*;
-
 public class GameStatistics {
-    static int numberOfGames = 0;
-    int numberOfTurns = 0;
-     int numberOfWonGamesOne = 0;
-     int numberOfWonGamesTwo = 0;
-    int numberOfRounds = 1;
-    boolean hasFinished = false;
+    private int numberOfTurns = 0;
+    private int numberOfWonGamesOne = 0;
+    private int numberOfWonGamesTwo = 0;
+    private int numberOfRounds = 1;
+    private boolean hasFinished = false;
 
-    public void incrNumberOfGames() {
-        numberOfGames++;
+    /**
+     * total number of games
+     * @return
+     */
+    public int getTotal() {
+        return getNumberOfWonGamesOne() + getNumberOfWonGamesTwo();
     }
-    public void incrNumberOfTurns () {
+
+    /**
+     * increment nr of turns
+     */
+    public void incrNumberOfTurns() {
         numberOfTurns++;
     }
+
+    /**
+     * increment nr of games won by player one
+     */
     public void incrNumberOfWonGamesOne() {
         numberOfWonGamesOne++;
     }
+
+    /**
+     * increment nr of games won by player two
+     */
     public void incrNumberOfWonGamesTwo() {
 
         numberOfWonGamesTwo++;
     }
 
+    /**
+     * increment number of rounds
+     */
     public void incrNumberOfRounds() {
         numberOfRounds++;
     }
 
-    //generate getters and setters
+    //getters and setters
 
-
-    public void setHasFinished(boolean hasFinished) {
-        this.hasFinished = hasFinished;
-    }
-
+    /**
+     * getter
+     * @return boolean to see that the  game has finished
+     */
     public boolean isHasFinished() {
         return hasFinished;
     }
 
-    public static int getNumberOfGames() {
-        return numberOfGames;
-    }
-
+    /**
+     * getter
+     * @return number of turns
+     */
     public int getNumberOfTurns() {
         return numberOfTurns;
     }
 
+    /**
+     * getter
+     * @return number of games won by one
+     */
     public  int getNumberOfWonGamesOne() {
         return numberOfWonGamesOne;
     }
 
+    /**
+     * getter
+     * @return number of games won by two
+     */
     public  int getNumberOfWonGamesTwo() {
         return numberOfWonGamesTwo;
     }
 
+    /**
+     * getter
+     * @return number of rounds
+     */
     public int getNumberOfRounds() {
         return numberOfRounds;
     }
-
-    public static void setNumberOfGames(int numberOfGames) {
-        GameStatistics.numberOfGames = numberOfGames;
+    /**
+     * setter
+     * @param hasFinished
+     */
+    public void setHasFinished(final boolean hasFinished) {
+        this.hasFinished = hasFinished;
     }
 
-    public void setNumberOfTurns(int numberOfTurns) {
+    /**
+     * setter
+     * @param numberOfTurns number of turns
+     */
+    public void setNumberOfTurns(final int numberOfTurns) {
         this.numberOfTurns = numberOfTurns;
     }
 
-    public  void setNumberOfWonGamesOne(int numberOfWonGamesOne) {
+    /**
+     * setter
+     * @param numberOfWonGamesOne nr games won by one
+     */
+    public  void setNumberOfWonGamesOne(final int numberOfWonGamesOne) {
         this.numberOfWonGamesOne = numberOfWonGamesOne;
     }
 
-    public  void setNumberOfWonGamesTwo(int numberOfWonGamesTwo) {
-        this.numberOfWonGamesTwo = numberOfWonGamesTwo;
-    }
-
-    public void setNumberOfRounds(int numberOfRounds) {
+    /**
+     * setter
+     * @param numberOfRounds nr of rounds
+     */
+    public void setNumberOfRounds(final int numberOfRounds) {
         this.numberOfRounds = numberOfRounds;
     }
 }

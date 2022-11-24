@@ -5,64 +5,116 @@ import java.util.ArrayList;
 public class Hero {
     private int mana;
     private String description;
-    private String Name;
+    private String name;
     private int health = 30;
     private ArrayList<String> colors;
 
-    boolean hasAttacked = false;
+    private boolean hasAttacked = false;
 
-    public void attacked(int counter) {
+    /**
+     * decrease health
+     * @param counter
+     */
+
+    public void attacked(final int counter) {
         int life = getHealth() - counter;
         setHealth(life);
     }
 
     // getters and setters
 
-
-    public boolean isHasAttacked() {
-        return hasAttacked;
-    }
-
-    public void setHasAttacked(boolean hasAttacked) {
+    /**
+     * setter
+     * @param hasAttacked
+     */
+    public void setHasAttacked(final boolean hasAttacked) {
         this.hasAttacked = hasAttacked;
     }
 
-    public void setMana(int mana) {
+    /**
+     * setter
+     * @param mana
+     */
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
-    public void setDescription(String description) {
+    /**
+     * setter
+     * @param description
+     */
+    public void setDescription(final String description) {
         this.description = description;
     }
 
-    public void setColors(ArrayList<String> colors) {
+    /**
+     * setter
+     * @param colors
+     */
+    public void setColors(final ArrayList<String> colors) {
         this.colors = colors;
     }
 
+    /**
+     * setter
+     * @param health
+     */
+    public void setHealth(final int health) {
+        this.health = health;
+    }
+
+    /**
+     * setter
+     * @param name
+     */
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    /**
+     * getter
+     * @return
+     */
     public int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    /**
+     * getter
+     * @return
+     */
+    public boolean isHasAttacked() {
+        return hasAttacked;
     }
 
-    public void setName(String name) {
-        Name = name;
-    }
-
+    /**
+     * getter
+     * @return
+     */
     public String getName() {
-        return Name;
+        return name;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public int getMana() {
         return mana;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public ArrayList<String> getColors() {
         return colors;
     }

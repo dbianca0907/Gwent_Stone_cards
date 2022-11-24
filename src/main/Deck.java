@@ -1,11 +1,14 @@
 package main;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Deck {
-    ArrayList<Card> cards = null;
+    private ArrayList<Card> cards = null;
     private int nrCards;
-    private boolean wasUsed = false;
 
+    /**
+     *
+     * @return the cards
+     */
     public ArrayList<Card> getCards() {
         if (cards == null) {
             cards = new ArrayList<Card>();
@@ -15,27 +18,14 @@ public class Deck {
     }
 
 
-    // getters and setters
+    // setters
 
-
-    public int getNrCards() {
-        return nrCards;
-    }
-
-    public boolean isWasUsed() {
-        return wasUsed;
-    }
-
-    public void setNrCards(int nrCards) {
+    /**
+     * setter
+     * @param nrCards
+     */
+    public void setNrCards(final int nrCards) {
         this.nrCards = nrCards;
-    }
-
-    public void setWasUsed(boolean wasUsed) {
-        this.wasUsed = wasUsed;
-    }
-
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
     }
 
 }
